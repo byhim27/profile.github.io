@@ -1,56 +1,206 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile HIM </title>
-    <link rel="shorcut icon" href="./image.webp">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link rel="stylesheet" href="./profile.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>Profile - Tô Đức Anh</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #009933;
+            margin: 0;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        h1 {
+            text-align: center;
+            color: #fff;
+        }
+
+        .question-container {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .button {
+            flex: 1;
+            padding: 10px 20px;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            color: #fff;
+            background-color: #333;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 10px;
+        }
+
+        .button:hover {
+            background-color: #555;
+        }
+
+        .profile-info {
+            background-color: #fff;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .profile-info .avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 10px;
+        }
+
+        .profile-info .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-info p {
+            margin: 10px 0;
+        }
+
+        .icon {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+            background-color: #333;
+            border-radius: 50%;
+        }
+
+        .phone-icon {
+            background-color: #f39c12;
+        }
+
+        .school-icon {
+            background-color: #3498db;
+        }
+
+        .facebook-icon {
+            background-color: #3b5998;
+        }
+
+        .messenger-icon {
+            background-color: #0084ff;
+        }
+
+        .profile-buttons {
+            display: flex;
+            justify-content: center;
+        }
+
+        .snowflakes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            width: 15px;
+            height: 15px;
+            background: #fff;
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: snowflakes-fall linear infinite;
+        }
+
+        @keyframes snowflakes-fall {
+            0% {
+                transform: translateY(-50px);
+            }
+            100% {
+                transform: translateY(800px);
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="header">
-        <h1>About Me</h1>
-        <p>HIM's profile</p>
+    <h1>Thông tin cá nhân</h1>
+    <div id="questionContainer" class="question-container">
+        <h2>Bạn có muốn chuyển qua trang profile?</h2>
+        <div class="button-container">
+            <button onclick="showProfile()" class="button">Có</button>
+            <button onclick="goBack()" class="button">Không</button>
+        </div>
     </div>
-    <div class="content">
-        <img class="anh" src="me.jpeg" alt="">
-        <div class="confirm">
-            <i class="fas fa-check-circle"></i>
-            <p>Verify</p>
-        </div>
-        <div class="intro">
-            <p>Tô Đức Anh</p>
-        </div>
-        <hr>
-        <div class="info">
-            <div class="info-job">
-                <h3 class="info-job--header">Công việc</h3>
-                <div class="info-job--des">
-                    <i class="fas fa-globe"></i>
-                    <p>Tốt Nghiệp</p>
-                </div>
-                <div class="info-job--des">
-                    <i class="fas fa-graduation-cap"></i>
-                    <p>UNETI</p>
-                </div>
+    <div id="profileContainer" style="display: none;">
+        <div class="profile-info">
+            <div class="avatar">
+                <img src="avda.jpg" alt="">
             </div>
-            <div class="info-job">
-                <h3 class="info-job--header">Thông tin liên lạc</h3>
-                <div class="info-job--des">
-                    <i class="fas fa-paper-plane"></i>
-                    <p> Call: 0395693904 Phone:0395693904</p>
-                </div>
-                <div class="info-job--des">
-                    <i class="fab fa-facebook-f"></i>
-                    <p>Anh Duc</p>
-                </div>
+            <p><span class="icon phone-icon"></span>Họ tên: Tô Đức Anh</p>
+            <p><span class="icon school-icon"></span>Sinh ngày: 27/10/2000</p>
+            <p><span class="icon school-icon"></span>Tốt nghiệp: Đại Học Kinh Tế Kỹ Thuật Công Nghiệp</p>
+            <p><span class="icon phone-icon"></span>Số điện thoại: <span id="phoneNumber"></span></p>
+            <div class="profile-buttons">
+                <a href="https://www.facebook.com/your-facebook-profile" target="_blank" class="button">
+                    <span class="icon facebook-icon"></span>Chuyển đến Facebook
+                </a>
+                <button onclick="openMessenger()" class="button">
+                    <span class="icon messenger-icon"></span>Nhắn tin qua Messenger
+                </button>
             </div>
         </div>
-        <a href="https://www.facebook.com/profile.php?id=100025247501919" class="lienket">Message Me</a>
     </div>
+    <div class="snowflakes">
+        <div class="snowflake"></div>
+        <div class="snowflake"></div>
+        <div class="snowflake"></div>
+        <div class="snowflake"></div>
+        <div class="snowflake"></div>
+        <div class="snowflake"></div>
+        <div class="snowflake"></div>
+        <div class="snowflake"></div>
+        <div class="snowflake"></div>
+        <div class="snowflake"></div>
+        <div class="snowflake"></div>
+        <div class="snowflake"></div>
+        <div class="snowflake"></div>
+        <div class="snowflake"></div>
+        <div class="snowflake"></div>
+        <div class="snowflake"></div>
+        <div class="snowflake"></div>
+        <div class="snowflake"></div>
+        <div class="snowflake"></div>
+        <div class="snowflake"></div>
+    </div>
+
+    <script>
+        function openMessenger() {
+            window.open("https://www.messenger.com/t/100025247501919", "_blank");
+        }
+
+        function showProfile() {
+            var questionContainer = document.getElementById("questionContainer");
+            var profileContainer = document.getElementById("profileContainer");
+
+            questionContainer.style.display = "none";
+            profileContainer.style.display = "block";
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+
+        document.getElementById("phoneNumber").textContent = "0378795618";
+    </script>
+    <script src="https://itexpress.vn/API/files/it.snow.js"></script>
 </body>
 </html>
