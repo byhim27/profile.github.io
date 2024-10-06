@@ -1,63 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html lang="vi">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile - Tô Đức Anh</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #009933;
+            font-family: 'Poppins', Arial, sans-serif;
+            background: linear-gradient(135deg, #007ACC, #003E66);
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
             overflow: hidden;
         }
 
         h1 {
             text-align: center;
             color: #fff;
-        }
-
-        .question-container {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #fff;
-        }
-
-        .button-container {
-            display: flex;
-            justify-content: center;
-        }
-
-        .button {
-            flex: 1;
-            padding: 10px 20px;
-            font-size: 16px;
-            text-align: center;
-            text-decoration: none;
-            color: #fff;
-            background-color: #333;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            margin: 10px;
-        }
-
-        .button:hover {
-            background-color: #555;
+            margin-bottom: 40px;
+            animation: fadeInTitle 3s ease-in-out forwards;
         }
 
         .profile-info {
-            background-color: #fff;
-            border-radius: 4px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
             padding: 20px;
-            margin-bottom: 20px;
+            max-width: 600px;
+            width: 90vw;
+            box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .profile-info .avatar {
-            width: 150px;
-            height: 150px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
             overflow: hidden;
-            margin: 0 auto 10px;
+            margin-bottom: 20px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
         }
 
         .profile-info .avatar img {
@@ -67,120 +52,111 @@
         }
 
         .profile-info p {
-            margin: 10px 0;
+            font-size: 1.2rem;
+            margin: 15px 0;
+            text-align: center;
+            color: #333;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeSlideUp 2s ease-in-out forwards;
         }
 
-        .icon {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            margin-right: 5px;
-            background-color: #333;
-            border-radius: 50%;
+     
+        .profile-info p:nth-child(2) {
+            animation-delay: 1s;
         }
 
-        .phone-icon {
-            background-color: #f39c12;
+        .profile-info p:nth-child(3) {
+            animation-delay: 3s;
         }
 
-        .school-icon {
-            background-color: #3498db;
+        .profile-info p:nth-child(4) {
+            animation-delay: 5s;
         }
 
-        .facebook-icon {
-            background-color: #3b5998;
-        }
-
-        .messenger-icon {
-            background-color: #0084ff;
+        .profile-info p:nth-child(5) {
+            animation-delay: 7s;
         }
 
         .profile-buttons {
             display: flex;
-            justify-content: center;
-        }
-
-        .snowflakes {
-            position: fixed;
-            top: 0;
-            left: 0;
+            justify-content: space-between;
+            margin-top: 30px;
             width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 9999;
+            opacity: 0;
+            animation: fadeIn 9s ease-in-out forwards;
         }
 
-        .snowflake {
-            position: absolute;
-            top: -10px;
-            width: 15px;
-            height: 15px;
-            background: #fff;
-            border-radius: 50%;
-            opacity: 0.6;
-            animation: snowflakes-fall linear infinite;
+        .button {
+            background-color: #007ACC;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+            width: 45%;
+            text-align: center;
         }
 
-        @keyframes snowflakes-fall {
+        .button:hover {
+            background-color: #005A99;
+        }
+
+       
+        @keyframes fadeInTitle {
+            0% { opacity: 0; transform: translateY(-30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes fadeSlideUp {
             0% {
-                transform: translateY(-50px);
+                opacity: 0;
+                transform: translateY(30px);
             }
             100% {
-                transform: translateY(800px);
+                opacity: 1;
+                transform: translateY(0);
             }
         }
+
+        @keyframes fadeOutAll {
+            0% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+        }
+
+       
+        .fade-out {
+            animation: fadeOutAll 2s ease-in-out forwards;
+        }
+
     </style>
 </head>
 <body>
     <h1>Thông tin cá nhân</h1>
-    <div id="questionContainer" class="question-container">
-        <h2>Bạn có muốn chuyển qua trang profile?</h2>
-        <div class="button-container">
-            <button onclick="showProfile()" class="button">Có</button>
-            <button onclick="goBack()" class="button">Không</button>
+    <div class="profile-info">
+        <div class="avatar">
+            <img src="avda.jpg" alt="Avatar">
         </div>
-    </div>
-    <div id="profileContainer" style="display: none;">
-        <div class="profile-info">
-            <div class="avatar">
-                <img src="avda.jpg" alt="">
-            </div>
-            <p><span class="icon phone-icon"></span>Họ tên: Tô Đức Anh</p>
-            <p><span class="icon school-icon"></span>Sinh ngày: 27/10/2000</p>
-            <p><span class="icon school-icon"></span>Tốt nghiệp: Đại Học Kinh Tế Kỹ Thuật Công Nghiệp</p>
-            <p><span class="icon phone-icon"></span>Số điện thoại: <span id="phoneNumber"></span></p>
-            <div class="profile-buttons">
-                <a href="https://www.facebook.com/profile.php?id=100025247501919" target="_blank" class="button">
-                    <span class="icon facebook-icon"></span>Chuyển đến Facebook
-                </a>
-                <button onclick="openMessenger()" class="button">
-                    <span class="icon messenger-icon"></span>Nhắn tin qua Messenger
-                </button>
-            </div>
+        <p>Họ tên: Tô Đức Anh</p>
+        <p>Sinh ngày: 27/10/2000</p>
+        <p>Tốt nghiệp: Đại Học Kinh Tế Kỹ Thuật Công Nghiệp</p>
+        <p>Số điện thoại: <span>0378795618</span></p>
+        <div class="profile-buttons">
+            <a href="https://www.facebook.com/profile.php?id=100025247501919" target="_blank" class="button">Facebook</a>
+            <button onclick="openMessenger()" class="button">Messenger</button>
         </div>
-    </div>
-    <div class="snowflakes">
-        <div class="snowflake"></div>
-        <div class="snowflake"></div>
-        <div class="snowflake"></div>
-        <div class="snowflake"></div>
-        <div class="snowflake"></div>
-        <div class="snowflake"></div>
-        <div class="snowflake"></div>
-        <div class="snowflake"></div>
-        <div class="snowflake"></div>
-        <div class="snowflake"></div>
-        <div class="snowflake"></div>
-        <div class="snowflake"></div>
-        <div class="snowflake"></div>
-        <div class="snowflake"></div>
-        <div class="snowflake"></div>
-        <div class="snowflake"></div>
-        <div class="snowflake"></div>
-        <div class="snowflake"></div>
-        <div class="snowflake"></div>
-        <div class="snowflake"></div>
-        <div class="snowflake"></div>
     </div>
 
     <script>
@@ -188,20 +164,29 @@
             window.open("https://www.messenger.com/t/100025247501919", "_blank");
         }
 
-        function showProfile() {
-            var questionContainer = document.getElementById("questionContainer");
-            var profileContainer = document.getElementById("profileContainer");
+        function showProfileInfo() {
+            const profileInfo = document.querySelector('.profile-info');
+            const paragraphs = profileInfo.querySelectorAll('p, .profile-buttons');
+            profileInfo.classList.remove('fade-out'); 
 
-            questionContainer.style.display = "none";
-            profileContainer.style.display = "block";
+            paragraphs.forEach((p, index) => {
+                p.style.animation = `fadeSlideUp 2s ease-in-out forwards`;
+                p.style.animationDelay = `${index * 2 + 1}s`;
+            });
+
+            
+            setTimeout(() => {
+                profileInfo.classList.add('fade-out');
+            }, (paragraphs.length * 2 + 1) * 1000 + 5000); 
         }
 
-        function goBack() {
-            window.location.href = "https://www.facebook.com";
-        }
+      
+        showProfileInfo();
 
-        document.getElementById("phoneNumber").textContent = "0378795618";
+       
+        setInterval(() => {
+            showProfileInfo(); 
+        }, 25000);
     </script>
-    <script src="https://itexpress.vn/API/files/it.snow.js"></script>
 </body>
 </html>
