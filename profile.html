@@ -61,7 +61,6 @@
             animation: fadeSlideUp 2s ease-in-out forwards;
         }
 
-     
         .profile-info p:nth-child(2) {
             animation-delay: 1s;
         }
@@ -80,7 +79,7 @@
 
         .profile-buttons {
             display: flex;
-            justify-content: space-between;
+            justify-content: space-between; 
             margin-top: 30px;
             width: 100%;
             opacity: 0;
@@ -90,12 +89,13 @@
         .button {
             background-color: #007ACC;
             color: white;
-            padding: 10px 20px;
+            padding: 10px 0; 
             text-decoration: none;
             border-radius: 4px;
             font-size: 1rem;
             transition: background-color 0.3s;
-            width: 45%;
+            flex: 1; 
+            margin: 0 5px; 
             text-align: center;
         }
 
@@ -103,7 +103,6 @@
             background-color: #005A99;
         }
 
-       
         @keyframes fadeInTitle {
             0% { opacity: 0; transform: translateY(-30px); }
             100% { opacity: 1; transform: translateY(0); }
@@ -136,11 +135,9 @@
             }
         }
 
-       
         .fade-out {
             animation: fadeOutAll 2s ease-in-out forwards;
         }
-
     </style>
 </head>
 <body>
@@ -149,7 +146,7 @@
         <div class="avatar">
             <img src="avda.jpg" alt="Avatar">
         </div>
-        <p>Họ tên: Tô Đức Anh</p>
+        <p>Tên: Đức Anh</p>
         <p>Sinh ngày: 27/10/2000</p>
         <p>Tốt nghiệp: Đại Học Kinh Tế Kỹ Thuật Công Nghiệp</p>
         <p>Số điện thoại: <span>0395693904</span></p>
@@ -174,19 +171,16 @@
                 p.style.animationDelay = `${index * 2 + 1}s`;
             });
 
-            
             setTimeout(() => {
                 profileInfo.classList.add('fade-out');
             }, (paragraphs.length * 2 + 1) * 1000 + 5000); 
         }
 
-      
         showProfileInfo();
 
-       
         setInterval(() => {
             showProfileInfo(); 
         }, 25000);
     </script>
 </body>
-</html>
+</html> 
