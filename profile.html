@@ -1,186 +1,476 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="vi" data-bs-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
+    <title>Đức Anh - Profile</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
+
         body {
-            font-family: 'Poppins', Arial, sans-serif;
-            background: linear-gradient(135deg, #007ACC, #003E66);
-            margin: 0;
-            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background: var(--primary-gradient);
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="%23ffffff" fill-opacity="0.03" points="0,1000 1000,0 1000,1000"/></svg>');
+            pointer-events: none;
+        }
+
+        .profile-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 2.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            position: relative;
             overflow: hidden;
+            max-width: 500px;
+            width: 100%;
+            margin: 2rem;
         }
 
-        h1 {
-            text-align: center;
-            color: #fff;
-            margin-bottom: 40px;
-            animation: fadeInTitle 3s ease-in-out forwards;
+        .profile-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: var(--secondary-gradient);
+            opacity: 0.1;
+            animation: rotate 10s linear infinite;
+            z-index: -1;
         }
 
-        .profile-info {
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 8px;
-            padding: 20px;
-            max-width: 600px;
-            width: 90vw;
-            box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.1);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
-        .profile-info .avatar {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            overflow: hidden;
-            margin-bottom: 20px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        .avatar-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 2rem;
         }
 
-        .profile-info .avatar img {
+        .avatar {
             width: 100%;
             height: 100%;
+            border-radius: 50%;
             object-fit: cover;
+            border: 4px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
         }
 
-        .profile-info p {
-            font-size: 1.2rem;
-            margin: 15px 0;
+        .avatar:hover {
+            transform: scale(1.05);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .avatar-status {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #10b981;
+            border: 3px solid #1f2937;
+        }
+
+        .profile-name {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff 0%, #e5e7eb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             text-align: center;
-            color: #333;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeSlideUp 2s ease-in-out forwards;
+            margin-bottom: 0.5rem;
         }
 
-        .profile-info p:nth-child(2) {
-            animation-delay: 1s;
+        .profile-title {
+            color: #d1d5db;
+            text-align: center;
+            font-weight: 400;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
         }
 
-        .profile-info p:nth-child(3) {
-            animation-delay: 3s;
+        .info-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
         }
 
-        .profile-info p:nth-child(4) {
-            animation-delay: 5s;
+        .info-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.2);
         }
 
-        .profile-info p:nth-child(5) {
-            animation-delay: 7s;
-        }
-
-        .profile-buttons {
+        .info-label {
+            color: #9ca3af;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
             display: flex;
-            justify-content: space-between; 
-            margin-top: 30px;
-            width: 100%;
-            opacity: 0;
-            animation: fadeIn 9s ease-in-out forwards;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .button {
-            background-color: #007ACC;
-            color: white;
-            padding: 10px 0; 
-            text-decoration: none;
-            border-radius: 4px;
+        .info-value {
+            color: #f9fafb;
+            font-weight: 600;
             font-size: 1rem;
-            transition: background-color 0.3s;
-            flex: 1; 
-            margin: 0 5px; 
+        }
+
+        .social-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn-social {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-social:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            color: white;
+        }
+
+        .btn-facebook {
+            background: linear-gradient(135deg, #1877f2 0%, #0d5cb6 100%);
+        }
+
+        .btn-messenger {
+            background: linear-gradient(135deg, #00b2ff 0%, #006aff 100%);
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .stat-item {
             text-align: center;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .button:hover {
-            background-color: #005A99;
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff 0%, #e5e7eb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: block;
         }
 
-        @keyframes fadeInTitle {
-            0% { opacity: 0; transform: translateY(-30px); }
-            100% { opacity: 1; transform: translateY(0); }
+        .stat-label {
+            color: #9ca3af;
+            font-size: 0.75rem;
+            margin-top: 0.25rem;
         }
 
-        @keyframes fadeIn {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
+        /* Animations */
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out;
         }
 
-        @keyframes fadeSlideUp {
-            0% {
+        .fade-in-down {
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
                 opacity: 0;
                 transform: translateY(30px);
             }
-            100% {
+            to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
 
-        @keyframes fadeOutAll {
-            0% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-            100% {
+        @keyframes fadeInDown {
+            from {
                 opacity: 0;
-                transform: translateY(-20px);
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
 
-        .fade-out {
-            animation: fadeOutAll 2s ease-in-out forwards;
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Responsive */
+        @media (max-width: 576px) {
+            .profile-card {
+                margin: 1rem;
+                padding: 2rem 1.5rem;
+            }
+            
+            .profile-name {
+                font-size: 1.75rem;
+            }
+            
+            .social-buttons {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+        }
+
+        /* Floating elements */
+        .floating-element {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-1 {
+            width: 80px;
+            height: 80px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-2 {
+            width: 60px;
+            height: 60px;
+            top: 70%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+
+        .floating-3 {
+            width: 40px;
+            height: 40px;
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
         }
     </style>
 </head>
 <body>
-    <h1>Thông tin cá nhân</h1>
-    <div class="profile-info">
-        <div class="avatar">
-            <img src="avda.jpg" alt="Avatar">
+    <!-- Floating Background Elements -->
+    <div class="floating-element floating-1"></div>
+    <div class="floating-element floating-2"></div>
+    <div class="floating-element floating-3"></div>
+
+    <!-- Main Profile Card -->
+    <div class="profile-card fade-in-up">
+        <!-- Avatar Section -->
+        <div class="avatar-container fade-in-down">
+            <img src="avda.jpg" alt="Đức Anh" class="avatar">
+            <div class="avatar-status" title="Online"></div>
         </div>
-        <p>Tên: Đức Anh</p>
-        <p>Sinh ngày: <strong>Đang cập nhật</strong></p>
-        <p>Tốt nghiệp: <strong>Đang cập nhật</strong></p>
-        <p>Số điện thoại: <span>Đang cập nhật</span></p>
-        <div class="profile-buttons">
-            <a href="https://www.facebook.com/profile.php?id=100025247501919" target="_blank" class="button">Facebook</a>
-            <button onclick="openMessenger()" class="button">Messenger</button>
+
+        <!-- Name & Title -->
+        <h1 class="profile-name fade-in-down">Đức Anh</h1>
+        <p class="profile-title fade-in-down">Developer & Designer</p>
+
+        <!-- Stats -->
+        <div class="stats-container fade-in">
+            <div class="stat-item">
+                <span class="stat-number">25+</span>
+                <span class="stat-label">Projects</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">3+</span>
+                <span class="stat-label">Years Exp</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">100%</span>
+                <span class="stat-label">Dedicated</span>
+            </div>
+        </div>
+
+        <!-- Information -->
+        <div class="info-items">
+            <div class="info-item fade-in-up" style="animation-delay: 0.1s">
+                <div class="info-label">
+                    <i class="bi bi-person-badge"></i>
+                    Full Name
+                </div>
+                <div class="info-value">Nguyễn Đức Anh</div>
+            </div>
+            
+            <div class="info-item fade-in-up" style="animation-delay: 0.2s">
+                <div class="info-label">
+                    <i class="bi bi-calendar-event"></i>
+                    Date of Birth
+                </div>
+                <div class="info-value">Đang cập nhật</div>
+            </div>
+            
+            <div class="info-item fade-in-up" style="animation-delay: 0.3s">
+                <div class="info-label">
+                    <i class="bi bi-mortarboard"></i>
+                    Education
+                </div>
+                <div class="info-value">Đang cập nhật</div>
+            </div>
+            
+            <div class="info-item fade-in-up" style="animation-delay: 0.4s">
+                <div class="info-label">
+                    <i class="bi bi-telephone"></i>
+                    Phone Number
+                </div>
+                <div class="info-value">Đang cập nhật</div>
+            </div>
+        </div>
+
+        <!-- Social Buttons -->
+        <div class="social-buttons fade-in" style="animation-delay: 0.5s">
+            <a href="https://www.facebook.com/profile.php?id=100025247501919" 
+               target="_blank" 
+               class="btn-social btn-facebook">
+                <i class="bi bi-facebook"></i>
+                Facebook
+            </a>
+            <a href="https://www.messenger.com/t/100025247501919" 
+               target="_blank" 
+               class="btn-social btn-messenger">
+                <i class="bi bi-messenger"></i>
+                Messenger
+            </a>
         </div>
     </div>
 
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
     <script>
-        function openMessenger() {
-            window.open("https://www.messenger.com/t/100025247501919", "_blank");
-        }
+        // Add intersection observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
 
-        function showProfileInfo() {
-            const profileInfo = document.querySelector('.profile-info');
-            const paragraphs = profileInfo.querySelectorAll('p, .profile-buttons');
-            profileInfo.classList.remove('fade-out'); 
-
-            paragraphs.forEach((p, index) => {
-                p.style.animation = `fadeSlideUp 2s ease-in-out forwards`;
-                p.style.animationDelay = `${index * 2 + 1}s`;
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
             });
+        }, observerOptions);
 
-            setTimeout(() => {
-                profileInfo.classList.add('fade-out');
-            }, (paragraphs.length * 2 + 1) * 1000 + 5000); 
-        }
+        // Observe all animated elements
+        document.querySelectorAll('.fade-in-up, .fade-in-down, .fade-in').forEach(el => {
+            observer.observe(el);
+        });
 
-        showProfileInfo();
+        // Add click effects
+        document.querySelectorAll('.btn-social').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.cssText = `
+                    position: absolute;
+                    border-radius: 50%;
+                    background: rgba(255, 255, 255, 0.5);
+                    transform: scale(0);
+                    animation: ripple 0.6s linear;
+                    width: ${size}px;
+                    height: ${size}px;
+                    left: ${x}px;
+                    top: ${y}px;
+                `;
+                
+                this.style.position = 'relative';
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+                
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
 
-        setInterval(() => {
-            showProfileInfo(); 
-        }, 25000);
+        // Add ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
-</html> 
+</html>
