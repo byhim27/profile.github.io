@@ -3,32 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đức Anh - Professional Profile</title>
+    <title>Đức Anh - Profile</title>
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --accent-gradient: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
             --gold-gradient: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
-            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-bg: rgba(255, 255, 255, 0.1);
             --glass-border: rgba(255, 255, 255, 0.15);
         }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-family: 'Inter', sans-serif;
             background: var(--primary-gradient);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow-x: hidden;
+            padding: 1rem;
             position: relative;
-            padding: 20px;
         }
 
         body::before {
@@ -39,26 +43,28 @@
             right: 0;
             bottom: 0;
             background: 
-                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 107, 107, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(255, 215, 0, 0.05) 0%, transparent 50%);
+                radial-gradient(circle at 10% 20%, rgba(120, 119, 198, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(255, 107, 107, 0.1) 0%, transparent 40%);
             pointer-events: none;
+        }
+
+        .profile-container {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
         }
 
         .profile-card {
             background: var(--glass-bg);
-            backdrop-filter: blur(25px);
+            backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
-            border-radius: 28px;
-            padding: 3rem;
+            border-radius: 24px;
+            padding: 2rem 1.5rem;
             box-shadow: 
-                0 25px 50px -12px rgba(0, 0, 0, 0.25),
+                0 20px 40px rgba(0, 0, 0, 0.2),
                 inset 0 1px 0 rgba(255, 255, 255, 0.1);
             position: relative;
             overflow: hidden;
-            max-width: 480px;
-            width: 100%;
-            margin: 0 auto;
         }
 
         .profile-card::before {
@@ -71,24 +77,17 @@
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
         }
 
-        .profile-card::after {
-            content: '';
-            position: absolute;
-            top: -100px;
-            right: -100px;
-            width: 200px;
-            height: 200px;
-            background: var(--accent-gradient);
-            border-radius: 50%;
-            opacity: 0.05;
-            filter: blur(40px);
+        /* Avatar Section */
+        .avatar-section {
+            text-align: center;
+            margin-bottom: 2rem;
         }
 
         .avatar-container {
             position: relative;
-            width: 140px;
-            height: 140px;
-            margin: 0 auto 2.5rem;
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 1rem;
         }
 
         .avatar {
@@ -96,309 +95,179 @@
             height: 100%;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid transparent;
+            border: 2px solid transparent;
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1)) padding-box,
                         var(--gold-gradient) border-box;
-            box-shadow: 
-                0 15px 35px rgba(0, 0, 0, 0.3),
-                0 5px 15px rgba(255, 215, 0, 0.2);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
         }
 
-        .avatar:hover {
-            transform: scale(1.08) rotate(5deg);
-            box-shadow: 
-                0 25px 50px rgba(0, 0, 0, 0.4),
-                0 10px 25px rgba(255, 215, 0, 0.3);
-        }
-
-        .avatar-glow {
+        .status-badge {
             position: absolute;
-            top: -5px;
-            left: -5px;
-            right: -5px;
-            bottom: -5px;
-            background: var(--gold-gradient);
+            bottom: 5px;
+            right: 5px;
+            width: 12px;
+            height: 12px;
             border-radius: 50%;
-            filter: blur(15px);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-            z-index: -1;
+            background: #10b981;
+            border: 2px solid #1f2937;
+            box-shadow: 0 0 8px rgba(16, 185, 129, 0.5);
         }
 
-        .avatar-container:hover .avatar-glow {
-            opacity: 0.4;
-        }
-
-        .profile-name {
-            font-size: 2.5rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #FFFFFF 0%, #FFD700 50%, #FFFFFF 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        /* Name Section */
+        .name-section {
             text-align: center;
-            margin-bottom: 0.5rem;
-            letter-spacing: -0.5px;
-            text-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
-        }
-
-        .profile-title {
-            color: rgba(255, 255, 255, 0.8);
-            text-align: center;
-            font-weight: 500;
-            margin-bottom: 2.5rem;
-            font-size: 1.2rem;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            opacity: 0.9;
-        }
-
-        .info-section {
             margin-bottom: 2rem;
         }
 
-        .section-title {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .section-title i {
-            background: var(--gold-gradient);
+        .profile-name {
+            font-size: 1.75rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #FFFFFF 0%, #FFD700 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            font-size: 1.3rem;
+            background-clip: text;
+            margin-bottom: 0.25rem;
+        }
+
+        .profile-greeting {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            font-weight: 400;
+        }
+
+        /* Info Section */
+        .info-section {
+            margin-bottom: 1.5rem;
         }
 
         .info-grid {
             display: grid;
-            gap: 1rem;
+            gap: 0.75rem;
         }
 
         .info-item {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 18px;
-            padding: 1.25rem 1.5rem;
+            border-radius: 12px;
+            padding: 1rem;
             transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .info-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 3px;
-            height: 100%;
-            background: var(--gold-gradient);
-            opacity: 0;
-            transition: opacity 0.3s ease;
         }
 
         .info-item:hover {
             background: rgba(255, 255, 255, 0.08);
-            transform: translateY(-3px);
-            border-color: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        }
-
-        .info-item:hover::before {
-            opacity: 1;
+            transform: translateY(-2px);
         }
 
         .info-label {
             color: rgba(255, 255, 255, 0.7);
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             font-weight: 500;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.25rem;
             display: flex;
             align-items: center;
-            gap: 0.75rem;
+            gap: 0.5rem;
         }
 
         .info-label i {
             color: #FFD700;
-            font-size: 1.1rem;
-            width: 20px;
+            font-size: 0.9rem;
+            width: 16px;
         }
 
         .info-value {
             color: #FFFFFF;
             font-weight: 600;
-            font-size: 1.1rem;
-            margin-left: 1.75rem;
+            font-size: 0.9rem;
+            margin-left: 1.5rem;
         }
 
+        /* Social Section */
         .social-section {
-            margin-top: 2.5rem;
+            margin-top: 1.5rem;
         }
 
         .social-buttons {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1rem;
+            gap: 0.75rem;
         }
 
         .btn-social {
             background: rgba(255, 255, 255, 0.08);
             border: 1px solid rgba(255, 255, 255, 0.12);
             color: white;
-            padding: 1rem 1.5rem;
-            border-radius: 16px;
+            padding: 0.75rem 1rem;
+            border-radius: 12px;
             text-decoration: none;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.75rem;
-            font-weight: 600;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            backdrop-filter: blur(10px);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-social::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: left 0.6s ease;
-        }
-
-        .btn-social:hover::before {
-            left: 100%;
+            gap: 0.5rem;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            text-align: center;
         }
 
         .btn-social:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            color: white;
         }
 
         .btn-facebook {
             background: linear-gradient(135deg, #1877F2 0%, #0D5CB6 100%);
-            border: 1px solid rgba(24, 119, 242, 0.3);
         }
 
         .btn-messenger {
             background: linear-gradient(135deg, #00B2FF 0%, #006AFF 100%);
-            border: 1px solid rgba(0, 178, 255, 0.3);
         }
 
         .btn-social i {
-            font-size: 1.3rem;
+            font-size: 1rem;
         }
 
         /* Animations */
-        .fade-in-up {
-            opacity: 0;
-            transform: translateY(40px);
-            animation: fadeInUp 1s ease-out forwards;
-        }
-
-        .fade-in-down {
-            opacity: 0;
-            transform: translateY(-40px);
-            animation: fadeInDown 1s ease-out forwards;
-        }
-
         .fade-in {
             opacity: 0;
-            animation: fadeIn 1s ease-out forwards;
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        .slide-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideInUp 0.8s ease-out forwards;
         }
 
         .stagger-1 { animation-delay: 0.1s; }
         .stagger-2 { animation-delay: 0.2s; }
         .stagger-3 { animation-delay: 0.3s; }
         .stagger-4 { animation-delay: 0.4s; }
-        .stagger-5 { animation-delay: 0.5s; }
-
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInDown {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
 
         @keyframes fadeIn {
             to { opacity: 1; }
         }
 
-        /* Floating elements */
-        .floating-shape {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.03);
-            animation: float 8s ease-in-out infinite;
-            z-index: -1;
-        }
-
-        .shape-1 {
-            width: 120px;
-            height: 120px;
-            top: 10%;
-            left: 5%;
-            animation-delay: 0s;
-        }
-
-        .shape-2 {
-            width: 80px;
-            height: 80px;
-            bottom: 20%;
-            right: 8%;
-            animation-delay: 2s;
-        }
-
-        .shape-3 {
-            width: 60px;
-            height: 60px;
-            top: 60%;
-            left: 10%;
-            animation-delay: 4s;
-        }
-
-        @keyframes float {
-            0%, 100% { 
-                transform: translateY(0px) rotate(0deg); 
-            }
-            50% { 
-                transform: translateY(-25px) rotate(180deg); 
+        @keyframes slideInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
 
-        /* Responsive */
+        /* Responsive Design */
         @media (max-width: 576px) {
             .profile-card {
-                padding: 2rem 1.5rem;
-                margin: 1rem;
-            }
-            
-            .profile-name {
-                font-size: 2rem;
+                padding: 1.5rem 1.25rem;
             }
             
             .avatar-container {
-                width: 120px;
-                height: 120px;
+                width: 90px;
+                height: 90px;
+            }
+            
+            .profile-name {
+                font-size: 1.5rem;
             }
             
             .social-buttons {
@@ -406,111 +275,140 @@
             }
             
             .info-item {
-                padding: 1rem 1.25rem;
+                padding: 0.875rem;
             }
         }
 
-        /* Status badge */
-        .status-badge {
-            position: absolute;
-            bottom: 8px;
-            right: 8px;
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            background: #10b981;
-            border: 2px solid #1f2937;
-            box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
-            animation: pulse 2s infinite;
+        @media (max-width: 360px) {
+            .profile-card {
+                padding: 1.25rem 1rem;
+            }
+            
+            .avatar-container {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .profile-name {
+                font-size: 1.375rem;
+            }
+            
+            .btn-social {
+                padding: 0.625rem 0.875rem;
+                font-size: 0.85rem;
+            }
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+        /* Height optimization */
+        @media (max-height: 700px) {
+            body {
+                align-items: flex-start;
+                padding-top: 2rem;
+                padding-bottom: 2rem;
+            }
+            
+            .profile-card {
+                padding: 1.5rem 1.25rem;
+            }
+            
+            .avatar-container {
+                width: 80px;
+                height: 80px;
+                margin-bottom: 0.75rem;
+            }
+            
+            .name-section {
+                margin-bottom: 1.5rem;
+            }
+        }
+
+        /* Very small screens */
+        @media (max-width: 320px) {
+            .profile-card {
+                border-radius: 20px;
+                padding: 1rem 0.875rem;
+            }
+            
+            .info-item {
+                padding: 0.75rem;
+            }
+            
+            .btn-social {
+                padding: 0.5rem 0.75rem;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Floating Background Shapes -->
-    <div class="floating-shape shape-1"></div>
-    <div class="floating-shape shape-2"></div>
-    <div class="floating-shape shape-3"></div>
-
-    <!-- Main Profile Card -->
-    <div class="profile-card">
-        <!-- Avatar Section -->
-        <div class="avatar-container fade-in-down">
-            <img src="avda.jpg" alt="Đức Anh" class="avatar">
-            <div class="avatar-glow"></div>
-            <div class="status-badge" title="Online"></div>
-        </div>
-
-        <!-- Name & Title -->
-        <h1 class="profile-name fade-in-down">Đức Anh</h1>
-        <p class="profile-title fade-in-down stagger-1">Professional Portfolio</p>
-
-        <!-- Personal Information Section -->
-        <div class="info-section">
-            <h3 class="section-title fade-in stagger-2">
-                <i class="bi bi-person-vcard"></i>
-                Thông Tin Cá Nhân
-            </h3>
-            
-            <div class="info-grid">
-                <div class="info-item fade-in-up stagger-1">
-                    <div class="info-label">
-                        <i class="bi bi-person"></i>
-                        Họ Và Tên
-                    </div>
-                    <div class="info-value">Đức Anh</div>
-                </div>
-                
-                <div class="info-item fade-in-up stagger-2">
-                    <div class="info-label">
-                        <i class="bi bi-calendar-event"></i>
-                        Ngày Sinh
-                    </div>
-                    <div class="info-value">Đang cập nhật</div>
-                </div>
-                
-                <div class="info-item fade-in-up stagger-3">
-                    <div class="info-label">
-                        <i class="bi bi-mortarboard"></i>
-                        Học Vấn
-                    </div>
-                    <div class="info-value">Đang cập nhật</div>
-                </div>
-                
-                <div class="info-item fade-in-up stagger-4">
-                    <div class="info-label">
-                        <i class="bi bi-telephone"></i>
-                        Điện Thoại
-                    </div>
-                    <div class="info-value">Đang cập nhật</div>
+    <div class="profile-container">
+        <div class="profile-card">
+            <!-- Avatar Section -->
+            <div class="avatar-section fade-in">
+                <div class="avatar-container">
+                    <img src="avda.jpg" alt="Đức Anh" class="avatar">
+                    <div class="status-badge" title="Online"></div>
                 </div>
             </div>
-        </div>
 
-        <!-- Social Links Section -->
-        <div class="social-section">
-            <h3 class="section-title fade-in stagger-5">
-                <i class="bi bi-link-45deg"></i>
-                Kết Nối Với Tôi
-            </h3>
-            
-            <div class="social-buttons">
-                <a href="https://www.facebook.com/profile.php?id=100025247501919" 
-                   target="_blank" 
-                   class="btn-social btn-facebook fade-in stagger-3">
-                    <i class="bi bi-facebook"></i>
-                    Facebook
-                </a>
-                <a href="https://www.messenger.com/t/100025247501919" 
-                   target="_blank" 
-                   class="btn-social btn-messenger fade-in stagger-4">
-                    <i class="bi bi-messenger"></i>
-                    Messenger
-                </a>
+            <!-- Name Section -->
+            <div class="name-section fade-in stagger-1">
+                <h1 class="profile-name">Đức Anh</h1>
+                <p class="profile-greeting">Xin chào!</p>
+            </div>
+
+            <!-- Information Section -->
+            <div class="info-section">
+                <div class="info-grid">
+                    <div class="info-item slide-in-up stagger-1">
+                        <div class="info-label">
+                            <i class="bi bi-person"></i>
+                            Họ và tên
+                        </div>
+                        <div class="info-value">Đức Anh</div>
+                    </div>
+                    
+                    <div class="info-item slide-in-up stagger-2">
+                        <div class="info-label">
+                            <i class="bi bi-calendar-event"></i>
+                            Ngày sinh
+                        </div>
+                        <div class="info-value">Đang cập nhật</div>
+                    </div>
+                    
+                    <div class="info-item slide-in-up stagger-3">
+                        <div class="info-label">
+                            <i class="bi bi-mortarboard"></i>
+                            Học vấn
+                        </div>
+                        <div class="info-value">Đang cập nhật</div>
+                    </div>
+                    
+                    <div class="info-item slide-in-up stagger-4">
+                        <div class="info-label">
+                            <i class="bi bi-telephone"></i>
+                            Điện thoại
+                        </div>
+                        <div class="info-value">Đang cập nhật</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Social Links -->
+            <div class="social-section">
+                <div class="social-buttons">
+                    <a href="https://www.facebook.com/profile.php?id=100025247501919" 
+                       target="_blank" 
+                       class="btn-social btn-facebook fade-in stagger-3">
+                        <i class="bi bi-facebook"></i>
+                        Facebook
+                    </a>
+                    <a href="https://www.messenger.com/t/100025247501919" 
+                       target="_blank" 
+                       class="btn-social btn-messenger fade-in stagger-4">
+                        <i class="bi bi-messenger"></i>
+                        Messenger
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -519,55 +417,56 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     
     <script>
-        // Enhanced animations on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animationPlayState = 'running';
-                }
-            });
-        }, observerOptions);
-
-        // Observe all animated elements
-        document.querySelectorAll('.fade-in-up, .fade-in-down, .fade-in').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Add magnetic button effect
-        document.querySelectorAll('.btn-social').forEach(btn => {
-            btn.addEventListener('mousemove', function(e) {
-                const rect = this.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                
-                const angleX = (y - centerY) / 10;
-                const angleY = (centerX - x) / 10;
-                
-                this.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) translateZ(10px)`;
-            });
-            
-            btn.addEventListener('mouseleave', function() {
-                this.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
-            });
-        });
-
-        // Add page load animation
+        // Simple load animation
         document.addEventListener('DOMContentLoaded', function() {
-            document.body.style.opacity = '0';
-            document.body.style.transition = 'opacity 0.8s ease';
-            
+            // Trigger animations after load
             setTimeout(() => {
                 document.body.style.opacity = '1';
             }, 100);
         });
+
+        // Add click effects to buttons
+        document.querySelectorAll('.btn-social').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                // Add ripple effect
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.cssText = `
+                    position: absolute;
+                    border-radius: 50%;
+                    background: rgba(255, 255, 255, 0.5);
+                    transform: scale(0);
+                    animation: ripple 0.6s linear;
+                    width: ${size}px;
+                    height: ${size}px;
+                    left: ${x}px;
+                    top: ${y}px;
+                    pointer-events: none;
+                `;
+                
+                this.style.position = 'relative';
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+                
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+
+        // Add ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
